@@ -25,4 +25,15 @@ class Project extends Model
         return $slug;
 
     }
+
+    public function task_progress(){
+
+        return $this->hasOne(TaskProgress::class,'projectId');
+    }
+
+    public function tasks(){
+
+        return $this->hasMany(Task::class,'projectId');
+    }
+
 }
