@@ -1,4 +1,4 @@
 export const APP={
-    baseURL:'http://127.0.0.1:8000',
-    apiBaseURL:'http://127.0.0.1:8000/api'
+    baseURL:'http://127.0.0.1:8001',
+    apiBaseURL:'http://127.0.0.1:8001/api'
 }

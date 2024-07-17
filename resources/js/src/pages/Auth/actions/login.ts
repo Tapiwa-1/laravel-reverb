@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import { makeHttpReq } from "../../../helper/makeHttpReq";
 import { showError, successMsg } from "../../../helper/toast-notification";
+import { showErrorResponse } from "../../../helper/util";
 
 // Define types for user input and response from loginAPI
 export type LoginUserType = {
@@ -9,12 +10,20 @@ export type LoginUserType = {
 };
 
 export type LoginResponseType = {
-    user: { email: string };
-    message: string;
+    user: { email: string,
+        id: number,
+        isLoggedin:boolean,
+        token:string,
+
+     },
+    message: string,
+    isLoggedIn: boolean,
 };
 
 // Reactive reference for user login input
-export const loginInput = ref<LoginUserType>({ email: "", password: "" });
+export const loginInput = ref<LoginUserType>({} as LoginUserType);
+
+
 
 // Function to handle user login logic
 export function useLoginUser() {
@@ -28,15 +37,18 @@ export function useLoginUser() {
             const data = await makeHttpReq<LoginUserType, LoginResponseType>('login', 'POST', loginInput.value);
 
             loading.value = false;  // Reset loading state after request completes
-            loginInput.value = { email: "", password: "" };  // Clear user input after successful login
-            successMsg(data.message);  // Show success message to user
+            loginInput.value = {} as LoginUserType
+            successMsg(data.message)
+            if(data.isLoggedIn){
+                localStorage.setItem('userData', JSON.stringify(data))
+                window.location.href="/app/dashboard"
+            }else{
+
+            }
         } catch (error) {
             loading.value = false;  // Reset loading state if an error occurs
 
-            // Handle error response (assuming error is an array of strings)
-            for (const message of error as string[]) {
-                showError(message);  // Show error message to user
-            }
+            showErrorResponse(error)
         }
     }
 

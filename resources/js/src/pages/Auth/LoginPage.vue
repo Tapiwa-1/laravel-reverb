@@ -60,7 +60,7 @@ async function submitRegister() {
                             </div>
                             <div class="form-group">
            
-                               <BaseBtn label="register" :loading="loading"/>
+                               <BaseBtn label="login" :loading="loading"/>
                             </div>
                         </form>
                     </div>

@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import { makeHttpReq } from "../../../helper/makeHttpReq";
 import { showError, successMsg } from "../../../helper/toast-notification";
+import { showErrorResponse } from "../../../helper/util";
 
 // Define types for user input and response from registration API
 export type RegisterUserType = {
@@ -9,12 +10,14 @@ export type RegisterUserType = {
 };
 
 export type RegisterResponseType = {
-    user: { email: string };
-    message: string;
+    user: { email: string },
+    message: string
 };
 
 // Reactive reference for user registration input
-export const registerInput = ref<RegisterUserType>({ email: "", password: "" });
+export const registerInput = ref<RegisterUserType>({ email: "", password: "" } as RegisterUserType);
+
+
 
 // Function to handle user registration logic
 export function useRegisterUser() {
@@ -34,9 +37,8 @@ export function useRegisterUser() {
             loading.value = false;  // Reset loading state if an error occurs
 
             // Handle error response (assuming error is an array of strings)
-            for (const message of error as string[]) {
-                showError(message);  // Show error message to user
-            }
+            showErrorResponse(error)
+            
         }
     }
 
