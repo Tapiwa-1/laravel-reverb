@@ -3,6 +3,16 @@
         <div class="container-fluid">
             <div class="row">
                 <NavBar @logout="logoutUser"/>
+                <main class="col-md-9 ms-sm-auto col-lg-10  bg-pages">
+                    <br /><br />
+                    <router-view v-slot="{ Component, route }">
+                    <transition name="fade" mode="out-in">
+                        <div :key="route.name">
+                        <component :is="Component"></component>
+                        </div>
+                    </transition>
+                    </router-view>
+                </main>
             </div>
         </div>
     </div>

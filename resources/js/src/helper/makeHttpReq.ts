@@ -10,7 +10,7 @@ type HttpVerbType = "GET" | "POST" | "PUT" | "DELETE";
  * @param input The input data to be sent with the request (will be JSON stringified).
  * @returns A Promise that resolves with the parsed response data of type TResponse.
  */
-export function makeHttpReq<TInput, TResponse>(endpoint: string, verb: HttpVerbType, input: TInput): Promise<TResponse> {
+export function makeHttpReq<TInput, TResponse>(endpoint: string, verb: HttpVerbType, input?: TInput): Promise<TResponse> {
     return new Promise<TResponse>(async (resolve, reject) => {
         try {
             // Perform the fetch request to the specified endpoint
