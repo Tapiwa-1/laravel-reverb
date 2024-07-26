@@ -16,7 +16,7 @@
 		<p>Hello, <br/>  <br/>
         we have sent to you this email to check if this Email : <a href="#">{{$user->email}}</a> your provide is a valid one; click on the link to verifiy it.
 
-	  <a style="font-weight:bold;color:blue" target="_blank" href="http://127.0.0.1:8001/check_email/{{$user->remember_token}}">Check my email</a>  </p><br/>
+	  <a style="font-weight:bold;color:blue" target="_blank" href="http://127.0.0.1:8000/check_email/{{$user->remember_token}}">Check my email</a>  </p><br/>
 		<p>Yours sincerely.</p>
 	</div>
 

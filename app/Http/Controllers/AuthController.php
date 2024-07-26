@@ -42,6 +42,7 @@ class AuthController extends Controller
 
         NewUserCreated::dispatch($user);
 
+        dd("Completed");
         return response(['user' => $user, 'message' => 'user created'], 200);
     }
 

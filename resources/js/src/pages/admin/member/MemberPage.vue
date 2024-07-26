@@ -9,7 +9,32 @@
                 </div>
                 <div class="card-body">
                 
-                    <MemberTable :members="memberData"/>
+                    <!-- <MemberTable
+                         @get-member="getMembers"
+                     :members="memberData"
+                     :loading="loading">
+                     <template #pagination>
+                        <Bootstrap5Pagination
+                        :data="memberData?.data"
+                        @pagination-change-page="getMembers"
+                        />
+                        
+                     </template>
+                    </MemberTable> -->
+                    <MemberTable
+                            @get-member="getMembers"
+                            :members="memberData"
+                            :loading="loading"
+                        >
+                            <template #pagination>
+                                <Bootstrap5Pagination 
+                                v-if="memberData?.data"
+                                :data="memberData?.data"
+                                @pagination-change-page="getMembers"
+                                />
+                               
+                            </template>
+                        </MemberTable>
                 </div>
             </div>
         </div>
@@ -22,6 +47,7 @@ import { RouterLink } from 'vue-router';
 import MemberTable from './components/MemberTable.vue';
 import { onMounted } from 'vue';
 import { useGetMembers } from './actions/GetMembers';
+import { Bootstrap5Pagination } from 'laravel-vue-pagination';
 
 const { getMembers, loading,memberData} = useGetMembers()
 
